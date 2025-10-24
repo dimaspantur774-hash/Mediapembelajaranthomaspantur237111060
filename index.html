@@ -1,374 +1,180 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id"> 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perangkat Keras dan Perangkat Lunak</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-        
-        body {
-            font-family: 'Poppins', sans-serif;
-        }
-        
-        .nav-button {
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .nav-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .nav-button:hover::before {
-            left: 100%;
-        }
-        
-        .nav-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        
-        .icon-container {
-            transition: all 0.3s ease;
-        }
-        
-        .nav-button:hover .icon-container {
-            transform: scale(1.1);
-        }
-        
-        .active {
-            background-color: #3b82f6;
-            color: white;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.8s ease-out;
-        }
-        
-        .content-section {
-            display: none;
-        }
-        
-        .content-section.active {
-            display: block;
-            animation: fadeIn 0.5s ease-out;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sistem Komputer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* Reset dan base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      color: #4C585B;
+      background: linear-gradient(to bottom, #F4EDD3, #A5BFCC);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header dan Navigasi */
+    header {
+      background-color: #F9F3EF;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #4C585B;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    nav a:hover {
+      background-color: #A5BFCC;
+      color: #F9F3EF;
+      transform: scale(1.05);
+    }
+
+    /* Main Content */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hero-title {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #4C585B;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero-description {
+      font-size: 1.2rem;
+      color: #7E99A3;
+      max-width: 700px;
+      margin-bottom: 2rem;
+      line-height: 1.8;
+    }
+
+    .cta-button {
+      background-color: #4C585B;
+      color: #F9F3EF;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .cta-button:hover {
+      background-color: #7E99A3;
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Footer */
+    footer {
+      background-color: #F9F3EF;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #7E99A3;
+      border-top: 1px solid #A5BFCC;
+    }
+
+    /* Responsivitas */
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2rem;
+      }
+
+      .hero-description {
+        font-size: 1rem;
+      }
+
+      nav ul {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
 </head>
-<body class="bg-gray-50 min-h-screen flex flex-col">
-    <!-- Header -->
-    <header class="bg-blue-600 text-white py-6 px-4 shadow-lg">
-        <div class="container mx-auto">
-            <h1 class="text-2xl md:text-3xl font-bold text-center">PERANGKAT KERAS DAN PERANGKAT LUNAK</h1>
-        </div>
-    </header>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">🏠 Home</a></li>
+        <li><a href="profile.html">👤 Profile</a></li>
+        <li><a href="absensi.html">🧾 Absensi</a></li>
+        <li><a href="Tujuan.html">🎯 Tujuan Pembelajaran</a></li>
+        <li><a href="Materi.html">📘 Materi</a></li>
+        <li><a href="Tugas.html">🧩 Tugas</a></li>
+        <li><a href="Game.html">🎮 Game</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <!-- Main Content -->
-    <main class="flex-grow container mx-auto px-4 py-8">
-        <!-- Navigation Grid -->
-        <div id="navigation" class="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-4xl mx-auto fade-in">
-            <!-- Home Button -->
-            <button class="nav-button bg-white rounded-lg shadow-md p-6 flex flex-col items-center justify-center hover:bg-blue-50 active" data-section="home">
-                <div class="icon-container bg-blue-100 rounded-full p-4 mb-3">
-                    <i class="fas fa-home text-blue-600 text-2xl"></i>
-                </div>
-                <span class="text-gray-800 font-medium">HOME</span>
-            </button>
-
-            <!-- Materi Button -->
-            <button class="nav-button bg-white rounded-lg shadow-md p-6 flex flex-col items-center justify-center hover:bg-blue-50" data-section="materi">
-                <div class="icon-container bg-blue-100 rounded-full p-4 mb-3">
-                    <i class="fas fa-book text-blue-600 text-2xl"></i>
-                </div>
-                <span class="text-gray-800 font-medium">MATERI</span>
-            </button>
-
-            <!-- Tujuan Pembelajaran Button -->
-            <button class="nav-button bg-white rounded-lg shadow-md p-6 flex flex-col items-center justify-center hover:bg-blue-50" data-section="tujuan">
-                <div class="icon-container bg-blue-100 rounded-full p-4 mb-3">
-                    <i class="fas fa-bullseye text-blue-600 text-2xl"></i>
-                </div>
-                <span class="text-gray-800 font-medium">TUJUAN PEMBELAJARAN</span>
-            </button>
-
-            <!-- Evaluasi Button -->
-            <button class="nav-button bg-white rounded-lg shadow-md p-6 flex flex-col items-center justify-center hover:bg-blue-50" data-section="evaluasi">
-                <div class="icon-container bg-blue-100 rounded-full p-4 mb-3">
-                    <i class="fas fa-clipboard-check text-blue-600 text-2xl"></i>
-                </div>
-                <span class="text-gray-800 font-medium">EVALUASI</span>
-            </button>
-
-            <!-- Tugas Button -->
-            <button class="nav-button bg-white rounded-lg shadow-md p-6 flex flex-col items-center justify-center hover:bg-blue-50" data-section="tugas">
-                <div class="icon-container bg-blue-100 rounded-full p-4 mb-3">
-                    <i class="fas fa-tasks text-blue-600 text-2xl"></i>
-                </div>
-                <span class="text-gray-800 font-medium">TUGAS</span>
-            </button>
-
-            <!-- Quiz Button -->
-            <button class="nav-button bg-white rounded-lg shadow-md p-6 flex flex-col items-center justify-center hover:bg-blue-50" data-section="quiz">
-                <div class="icon-container bg-blue-100 rounded-full p-4 mb-3">
-                    <i class="fas fa-question-circle text-blue-600 text-2xl"></i>
-                </div>
-                <span class="text-gray-800 font-medium">QUIS</span>
-            </button>
-        </div>
-
-        <!-- Content Sections -->
-        <div class="max-w-4xl mx-auto mt-8">
-            <!-- Home Section -->
-            <div id="home" class="content-section active bg-white rounded-lg shadow-md p-6">
-                <h2 class="text-2xl font-bold text-blue-600 mb-4">Selamat Datang di Platform Pembelajaran</h2>
-                <p class="text-gray-700 mb-4">Platform ini dirancang untuk membantu Anda memahami konsep perangkat keras dan perangkat lunak komputer.</p>
-                <div class="grid md:grid-cols-2 gap-4 mt-6">
-                    <div class="bg-blue-50 p-4 rounded-lg">
-                        <h3 class="font-semibold text-blue-700 mb-2">Perangkat Keras</h3>
-                        <p class="text-gray-600 text-sm">Pelajari komponen fisik komputer seperti CPU, RAM, motherboard, dan perangkat input/output.</p>
-                    </div>
-                    <div class="bg-blue-50 p-4 rounded-lg">
-                        <h3 class="font-semibold text-blue-700 mb-2">Perangkat Lunak</h3>
-                        <p class="text-gray-600 text-sm">Kenali berbagai jenis software, sistem operasi, dan aplikasi yang menjalankan komputer.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Materi Section -->
-            <div id="materi" class="content-section bg-white rounded-lg shadow-md p-6">
-                <h2 class="text-2xl font-bold text-blue-600 mb-4">Materi Pembelajaran</h2>
-                <div class="space-y-4">
-                    <div class="border-l-4 border-blue-500 pl-4">
-                        <h3 class="font-semibold text-lg">Bab 1: Pengenalan Perangkat Keras</h3>
-                        <p class="text-gray-600">Definisi, fungsi, dan jenis-jenis perangkat keras komputer.</p>
-                    </div>
-                    <div class="border-l-4 border-blue-500 pl-4">
-                        <h3 class="font-semibold text-lg">Bab 2: Komponen Internal Komputer</h3>
-                        <p class="text-gray-600">CPU, motherboard, RAM, storage, dan power supply.</p>
-                    </div>
-                    <div class="border-l-4 border-blue-500 pl-4">
-                        <h3 class="font-semibold text-lg">Bab 3: Perangkat Input dan Output</h3>
-                        <p class="text-gray-600">Keyboard, mouse, monitor, printer, dan perangkat I/O lainnya.</p>
-                    </div>
-                    <div class="border-l-4 border-blue-500 pl-4">
-                        <h3 class="font-semibold text-lg">Bab 4: Pengenalan Perangkat Lunak</h3>
-                        <p class="text-gray-600">Sistem operasi, aplikasi, dan pengembangan software.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tujuan Pembelajaran Section -->
-            <div id="tujuan" class="content-section bg-white rounded-lg shadow-md p-6">
-                <h2 class="text-2xl font-bold text-blue-600 mb-4">Tujuan Pembelajaran</h2>
-                <ul class="space-y-3">
-                    <li class="flex items-start">
-                        <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
-                        <div>
-                            <h3 class="font-semibold">Memahami Konsep Dasar</h3>
-                            <p class="text-gray-600">Siswa dapat memahami konsep dasar perangkat keras dan perangkat lunak komputer.</p>
-                        </div>
-                    </li>
-                    <li class="flex items-start">
-                        <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
-                        <div>
-                            <h3 class="font-semibold">Mengidentifikasi Komponen</h3>
-                            <p class="text-gray-600">Siswa dapat mengidentifikasi berbagai komponen perangkat keras dan fungsinya.</p>
-                        </div>
-                    </li>
-                    <li class="flex items-start">
-                        <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
-                        <div>
-                            <h3 class="font-semibold">Memahami Jenis Perangkat Lunak</h3>
-                            <p class="text-gray-600">Siswa dapat membedakan berbagai jenis perangkat lunak dan kegunaannya.</p>
-                        </div>
-                    </li>
-                    <li class="flex items-start">
-                        <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
-                        <div>
-                            <h3 class="font-semibold">Menganalisis Keterkaitan</h3>
-                            <p class="text-gray-600">Siswa dapat menganalisis keterkaitan antara perangkat keras dan perangkat lunak.</p>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Evaluasi Section -->
-            <div id="evaluasi" class="content-section bg-white rounded-lg shadow-md p-6">
-                <h2 class="text-2xl font-bold text-blue-600 mb-4">Evaluasi Pembelajaran</h2>
-                <div class="bg-blue-50 p-4 rounded-lg mb-4">
-                    <p class="text-gray-700 mb-4">Evaluasi akan dilakukan melalui beberapa metode untuk mengukur pemahaman Anda tentang materi:</p>
-                    <ul class="space-y-2">
-                        <li class="flex items-center">
-                            <i class="fas fa-file-alt text-blue-600 mr-2"></i>
-                            <span>Ujian Tengah Semester (UTS)</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-file-alt text-blue-600 mr-2"></i>
-                            <span>Ujian Akhir Semester (UAS)</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-project-diagram text-blue-600 mr-2"></i>
-                            <span>Proyek Praktikum</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-users text-blue-600 mr-2"></i>
-                            <span>Presentasi Kelompok</span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="mt-4">
-                    <h3 class="font-semibold text-lg mb-2">Kriteria Penilaian:</h3>
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full bg-white border border-gray-200">
-                            <thead>
-                                <tr class="bg-gray-100">
-                                    <th class="px-4 py-2 text-left">Komponen</th>
-                                    <th class="px-4 py-2 text-center">Bobot</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="px-4 py-2 border-t">UTS</td>
-                                    <td class="px-4 py-2 text-center border-t">30%</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-2 border-t">UAS</td>
-                                    <td class="px-4 py-2 text-center border-t">40%</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-2 border-t">Tugas & Proyek</td>
-                                    <td class="px-4 py-2 text-center border-t">20%</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-2 border-t">Kehadiran & Partisipasi</td>
-                                    <td class="px-4 py-2 text-center border-t">10%</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tugas Section -->
-            <div id="tugas" class="content-section bg-white rounded-lg shadow-md p-6">
-                <h2 class="text-2xl font-bold text-blue-600 mb-4">Tugas</h2>
-                <div class="space-y-4">
-                    <div class="border rounded-lg p-4 hover:shadow-md transition-shadow">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="font-semibold text-lg">Tugas 1: Analisis Komponen Komputer</h3>
-                            <span class="bg-red-100 text-red-600 text-xs px-2 py-1 rounded">Deadline: 5 November 2025</span>
-                        </div>
-                        <p class="text-gray-600 mb-3">Buatlah laporan analisis komponen-komponen komputer modern dan fungsinya.</p>
-                        <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">
-                            <i class="fas fa-download mr-2"></i>Unduh Petunjuk
-                        </button>
-                    </div>
-                    
-                    <div class="border rounded-lg p-4 hover:shadow-md transition-shadow">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="font-semibold text-lg">Tugas 2: Perbandingan Sistem Operasi</h3>
-                            <span class="bg-yellow-100 text-yellow-600 text-xs px-2 py-1 rounded">Deadline: 7 November 2025</span>
-                        </div>
-                        <p class="text-gray-600 mb-3">Bandingkan setidaknya 3 sistem operasi populer dari segi kelebihan dan kekurangannya.</p>
-                        <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">
-                            <i class="fas fa-download mr-2"></i>Unduh Petunjuk
-                        </button>
-                    </div>
-                    
-                    <div class="border rounded-lg p-4 hover:shadow-md transition-shadow">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="font-semibold text-lg">Proyek Akhir: Rancang Sistem Komputer</h3>
-                            <span class="bg-green-100 text-green-600 text-xs px-2 py-1 rounded">Deadline: 15 November 2025</span>
-                        </div>
-                        <p class="text-gray-600 mb-3">Rancang sebuah sistem komputer lengkap untuk kebutuhan bisnis tertentu dengan justifikasi pemilihan komponen.</p>
-                        <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">
-                            <i class="fas fa-download mr-2"></i>Unduh Petunjuk
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Quiz Section -->
-            <div id="quiz" class="content-section bg-white rounded-lg shadow-md p-6">
-                <h2 class="text-2xl font-bold text-blue-600 mb-4">Quiz</h2>
-                <div class="bg-blue-50 p-4 rounded-lg mb-4">
-                    <p class="text-gray-700">Uji pemahaman Anda dengan quiz interaktif tentang perangkat keras dan perangkat lunak komputer.</p>
-                </div>
- 
-                    
-  
-<div class="border rounded-lg p-4">
-    <h3 class="font-semibold mb-3">Quiz 1: Perangkat Lunak</h3>
-    <p class="text-gray-600 mb-3">
-        5 pertanyaan tentang  perangkat Keras dan Perangkat Lunak.
+  <main>
+    <h1 class="hero-title">Sistem Komputer</h1>
+    <p class="hero-description">
+      Selamat datang di media pembelajaran interaktif tentang Sistem Komputer. Disini kita akan belajar tentang Perangkat Keras dan Perangkat Lunak.
+      Di sini, Anda akan menjelajahi konsep dasar teknologi informasi dengan cara yang menarik dan mudah dipahami.
+      Mari mulai perjalanan edukasi Anda untuk memahami komponen penting dalam dunia digital!
     </p>
-    <div class="flex justify-between items-center">
-        <span class="text-sm text-gray-500">Durasi: 15 menit</span>
-        <a href="https://wayground.com/join?gc=756606" 
-           target="_blank"
-           rel="noopener noreferrer"
-           class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors inline-block">
-           Mulai Quiz
-        </a>
-    </div>
-</div>
+    <button class="cta-button" id="mulaiBelajar">Mulai Belajar</button>
+  </main>
 
-                </div>
-                
-                <div class="mt-6 p-4 bg-yellow-50 rounded-lg">
-                    <p class="text-sm text-yellow-800">
-                        <i class="fas fa-info-circle mr-2"></i>
-                        Quiz dapat diulang hingga 3 kali. Nilai tertinggi akan diambil sebagai nilai akhir quiz.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </main>
+  <footer>
+    <p>© 2025 | Media Pembelajaran TIK - Sistem Komputer by Thomas Pantur</p>
+  </footer>
 
-    <!-- Footer -->
-    <footer class="bg-blue-600 text-white py-4 px-4 mt-8">
-        <div class="container mx-auto text-center">
-            <p>© 2023 Perangkat Keras dan Perangkat Lunak. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script>
-        // Navigation functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const navButtons = document.querySelectorAll('.nav-button');
-            const contentSections = document.querySelectorAll('.content-section');
-            
-            navButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // Remove active class from all buttons and sections
-                    navButtons.forEach(btn => btn.classList.remove('active'));
-                    contentSections.forEach(section => section.classList.remove('active'));
-                    
-                    // Add active class to clicked button
-                    this.classList.add('active');
-                    
-                    // Show corresponding content section
-                    const sectionId = this.getAttribute('data-section');
-                    document.getElementById(sectionId).classList.add('active');
-                });
-            });
-        });
-    </script>
+  <script>
+    // Event klik tombol "Mulai Belajar"
+    document.getElementById('mulaiBelajar').addEventListener('click', function() {
+      alert('Selamat! Anda telah memulai pembelajaran.\nSilakan pilih menu di atas untuk melanjutkan.');
+    });
+  </script>
 </body>
 </html>
